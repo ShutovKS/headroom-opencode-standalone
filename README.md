@@ -4,7 +4,7 @@
 
 [![CI](https://github.com/shutovks/headroom-opencode-standalone/actions/workflows/ci.yml/badge.svg)](https://github.com/shutovks/headroom-opencode-standalone/actions/workflows/ci.yml)
 [![npm](https://img.shields.io/npm/v/@shutovks/headroom-opencode-standalone)](https://www.npmjs.com/package/@shutovks/headroom-opencode-standalone)
-[![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 [![Node](https://img.shields.io/badge/node-%3E%3D20-green)](https://nodejs.org)
 
 This is the standalone counterpart to the official [`headroom-opencode`](https://github.com/headroomlabs-ai/headroom/tree/main/plugins/opencode) plugin. The official plugin assumes a proxy is already running (started by `headroom wrap`); **this one spawns and manages its own**, so it works from a bare OpenCode config with nothing but the `headroom` CLI on `PATH`.
@@ -142,4 +142,4 @@ PRs welcome. Keep the diff minimal, run `npm run typecheck && npm run build && n
 
 ## License
 
-[Apache-2.0](LICENSE)
+[MIT](LICENSE)
