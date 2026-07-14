@@ -35,7 +35,7 @@
   "author": "ShutovKS",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/shutovks/headroom-opencode-standalone.git"
+    "url": "https://github.com/ShutovKS/headroom-opencode-standalone"
   },
   "engines": {
     "node": ">=20"
