@@ -35,7 +35,9 @@ Files:
 
 ## Release
 
-`git tag v*` → `.github/workflows/release.yml` builds, tests, publishes to npm via `NPM_TOKEN` secret, cuts a GitHub Release. Bump `version` in `package.json` to match the tag.
+`git tag v*` → `.github/workflows/release.yml` builds, tests, publishes to npm via `NPM_TOKEN` secret (with `--provenance` OIDC attestation — needs `id-token: write`), and cuts a GitHub Release via `gh release create`. The publish is idempotent: it checks `npm view <name>@<version>` first and skips if already published, so re-running a tag won't fail. A manual `workflow_dispatch` run is a no-op for publishing (the `if: github.ref_type == 'tag'` guard ensures only real tags publish). Bump `version` in `package.json` to match the tag.
+
+CI/release patterns are adopted from `ShutovKS/opencode-model-fallback` (idempotent publish, provenance, tag guard, `gh release create`). That repo uses Bun + real-opencode e2e; this one stays on npm/tsup/vitest because a headroom e2e needs the `headroom` binary + provider keys in CI (non-deterministic, not free). Switch to Bun for cross-repo uniformity only if you also drop vitest for `bun test`.
 
 ## Testing
 
