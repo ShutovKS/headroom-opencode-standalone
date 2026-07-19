@@ -20,4 +20,3 @@ export const HEADROOM_BIN =
 // (headroom proxy --help). Default keeps http/2; set to "1" if stability
 // issues persist under heavy multi-instance load.
 export const NO_HTTP2 = process.env.HEADROOM_NO_HTTP2 === "1"
-export const DEFAULT_PROXY_URL = "http://127.0.0.1:8787"

@@ -1,18 +1,22 @@
 import type { Plugin } from "@opencode-ai/plugin"
 import { tool } from "@opencode-ai/plugin"
+import { accessSync, constants } from "node:fs"
 import { installHeadroomTransport } from "./transport.js"
 import { ensureProxy, getProxyUrl, killProxy, spawnedByMe } from "./proxy.js"
 import { createHeadroomRetrieveTool } from "./retrieve.js"
+import { HEADROOM_BIN } from "./config.js"
 
-export const HeadroomPlugin: Plugin = async ({ $ }) => {
-  let headroomInPath = true
+export const HeadroomPlugin: Plugin = async () => {
+  // Check the exact binary we'll spawn, not PATH — HEADROOM_BIN may point
+  // off-PATH and `which headroom` would wrongly disable compression.
+  let binOk = true
   try {
-    await $`which headroom`.quiet()
+    accessSync(HEADROOM_BIN, constants.X_OK)
   } catch {
-    headroomInPath = false
+    binOk = false
   }
 
-  const proxyUrl = await ensureProxy(headroomInPath)
+  const proxyUrl = await ensureProxy(binOk)
   if (!proxyUrl) {
     console.warn("[headroom] no proxy available — compression disabled")
     return {}

@@ -15,20 +15,6 @@ export function createHeadroomRetrieveTool(config: RetrieveToolConfig) {
   return {
     description:
       "Retrieve the full, original version of a compressed context chunk by its hash.",
-    parameters: {
-      type: "object" as const,
-      properties: {
-        hash: {
-          type: "string",
-          description: "24-character hex hash from the compression marker",
-        },
-        query: {
-          type: "string",
-          description: "Optional relevance query to bias retrieval",
-        },
-      },
-      required: ["hash"],
-    },
     async execute(args: {
       hash: string
       query?: string
