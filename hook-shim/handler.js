@@ -1,4 +1,4 @@
-import { installHeadroomTransport } from "../dist/index.js"
+import { installHeadroomTransport } from "../dist/transport.js"
 
 const proxyUrl = process.env.HEADROOM_OPENCODE_TRANSPORT_PROXY_URL
 if (!proxyUrl) {

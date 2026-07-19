@@ -4,6 +4,7 @@ dist/
 *.log
 .DS_Store
 coverage/
+.codegraph/
 
 # stray tsc emits next to sources (tsconfig noEmit:true; tsup owns dist/)
 src/**/*.js

@@ -1,6 +1,6 @@
 {
   "name": "@shutovks/headroom-opencode-standalone",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Self-contained Headroom transport for OpenCode — spawns the proxy, no `headroom wrap` needed.",
   "type": "module",
   "main": "./dist/index.js",
@@ -20,6 +20,7 @@
     "build": "tsup",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
+    "test:e2e": "npm run build && bun test tests/e2e/",
     "prepublishOnly": "npm run build"
   },
   "keywords": [
@@ -45,6 +46,7 @@
   },
   "devDependencies": {
     "@opencode-ai/plugin": "^1.17.20",
+    "@types/bun": "latest",
     "@types/node": "^22.10.0",
     "tsup": "^8.3.0",
     "typescript": "^5.7.0",

@@ -488,7 +488,7 @@ export function installHeadroomTransport(options: InstallOptions): () => void {
       logThrottled("proxy unreachable — routing direct (no compression)")
       return state.originalFetch(...args)
     }
-  }
+  } as typeof fetch
 
   http.request = wrapRequest(
     state.originalHttpRequest,
