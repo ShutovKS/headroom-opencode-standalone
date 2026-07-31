@@ -1,6 +1,6 @@
 import { spawn, type ChildProcess } from "node:child_process"
 import { createServer } from "node:net"
-import { FIXED_PORT, HEADROOM_BIN, NO_HTTP2 } from "./config.js"
+import { FIXED_PORT, HEADROOM_BIN, INTERCEPT_TOOL_RESULTS, NO_HTTP2 } from "./config.js"
 
 let proxyProcess: ChildProcess | null = null
 let spawnedByUs = false
@@ -91,7 +91,8 @@ export async function ensureProxy(headroomInPath: boolean): Promise<string> {
     proxyEnv.ANTHROPIC_TARGET_API_URL = process.env.HEADROOM_ANTHROPIC_URL
   }
 
-  const args = ["proxy", "--port", String(port), "--intercept-tool-results"]
+  const args = ["proxy", "--port", String(port)]
+  if (INTERCEPT_TOOL_RESULTS) args.push("--intercept-tool-results")
   if (NO_HTTP2) args.push("--no-http2")
 
   proxyProcess = spawn(HEADROOM_BIN, args, { stdio: "pipe", env: proxyEnv })

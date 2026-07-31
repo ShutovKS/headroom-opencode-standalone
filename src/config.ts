@@ -20,3 +20,9 @@ export const HEADROOM_BIN =
 // (headroom proxy --help). Default keeps http/2; set to "1" if stability
 // issues persist under heavy multi-instance load.
 export const NO_HTTP2 = process.env.HEADROOM_NO_HTTP2 === "1"
+// ponytail: --intercept-tool-results is experimental in headroom and hard-fails
+// proxy startup (sys.exit 1) when ast-grep can't install. Default off so a
+// missing ast-grep never kills the whole compression pipeline — opt in with
+// HEADROOM_INTERCEPT_TOOL_RESULTS=1 for the ast-grep Read outliner.
+export const INTERCEPT_TOOL_RESULTS =
+  process.env.HEADROOM_INTERCEPT_TOOL_RESULTS === "1"
