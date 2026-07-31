@@ -6,7 +6,7 @@ import { ensureProxy, getProxyUrl, killProxy, spawnedByMe } from "./proxy.js"
 import { createHeadroomRetrieveTool } from "./retrieve.js"
 import { HEADROOM_BIN } from "./config.js"
 
-export const HeadroomPlugin: Plugin = async () => {
+export const HeadroomPlugin: Plugin = async (input) => {
   // Check the exact binary we'll spawn, not PATH — HEADROOM_BIN may point
   // off-PATH and `which headroom` would wrongly disable compression.
   let binOk = true
@@ -49,6 +49,8 @@ export const HeadroomPlugin: Plugin = async () => {
     "shell.env": async (_input, output) => {
       output.env.HEADROOM_PROXY_URL = getProxyUrl()
       output.env.HEADROOM_ACTIVE = "1"
+      output.env.HEADROOM_PROJECT =
+        (input.project as { id?: string }).id ?? input.directory
     },
   }
 }
