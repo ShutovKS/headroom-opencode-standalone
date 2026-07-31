@@ -39,7 +39,6 @@ export const HeadroomPlugin: Plugin = async (input) => {
           hash: tool.schema
             .string()
             .regex(/^[a-f0-9]{24}$/i, "Expected 24-character hex hash"),
-          query: tool.schema.string().optional(),
         },
         async execute(args) {
           return retrieve.execute(args)

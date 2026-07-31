@@ -14,10 +14,10 @@ export function createHeadroomRetrieveTool(config: RetrieveToolConfig) {
 
   return {
     description:
-      "Retrieve the full, original version of a compressed context chunk by its hash.",
+      "Retrieve the full, original version of a compressed context chunk by its hash. " +
+        "Retrieval is by hash and always returns the full original content.",
     async execute(args: {
       hash: string
-      query?: string
     }): Promise<RetrieveResult> {
       if (!HASH_RE.test(args.hash)) {
         return {
@@ -30,10 +30,7 @@ export function createHeadroomRetrieveTool(config: RetrieveToolConfig) {
         const res = await fetch(`${origin}/v1/retrieve`, {
           method: "POST",
           headers: { "content-type": "application/json" },
-          body: JSON.stringify({
-            hash: args.hash,
-            ...(args.query ? { query: args.query } : {}),
-          }),
+          body: JSON.stringify({ hash: args.hash }),
         })
         if (!res.ok) {
           const text = await res.text().catch(() => "")
