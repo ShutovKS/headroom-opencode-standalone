@@ -31,6 +31,7 @@ export function createHeadroomRetrieveTool(config: RetrieveToolConfig) {
           method: "POST",
           headers: { "content-type": "application/json" },
           body: JSON.stringify({ hash: args.hash }),
+          signal: AbortSignal.timeout(10_000),
         })
         if (!res.ok) {
           const text = await res.text().catch(() => "")
